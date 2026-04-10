@@ -1,0 +1,66 @@
+# ===========================
+# JAVA / MAVEN
+# ===========================
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+.mvn/wrapper/maven-wrapper.jar
+
+# Maven local settings
+.settings.xml
+
+# ===========================
+# NODE / ANGULAR
+# ===========================
+node_modules/
+dist/
+.angular/
+.cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# ===========================
+# IDE FILES
+# ===========================
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# ===========================
+# OS FILES
+# ===========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===========================
+# ENV / SECRETS
+# ===========================
+.env
+.env.local
+.env.*.local
+application-local.yml
+application-local.properties
