@@ -17,7 +17,7 @@
     <artifactId>backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>backend</name>
-    <description>Full-Stack Application Backend</description>
+    <description>Task Manager App - Spring Boot Backend</description>
     <packaging>jar</packaging>
 
     <properties>
