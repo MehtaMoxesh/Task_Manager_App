@@ -5,6 +5,7 @@ import com.example.backend.dto.UserResponse;
 import com.example.backend.entity.User;
 import com.example.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     // Get all users
     public List<UserResponse> getAllUsers() {
@@ -39,7 +41,7 @@ public class UserService {
         User user = new User();
         user.setName(request.getName());
         user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword()); // plain text for now (JWT step will hash it)
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(User.Role.USER);
         return UserResponse.fromEntity(userRepository.save(user));
     }
@@ -51,7 +53,7 @@ public class UserService {
         user.setName(request.getName());
         user.setEmail(request.getEmail());
         if (request.getPassword() != null && !request.getPassword().isBlank()) {
-            user.setPassword(request.getPassword());
+            user.setPassword(passwordEncoder.encode(request.getPassword()));
         }
         return UserResponse.fromEntity(userRepository.save(user));
     }
