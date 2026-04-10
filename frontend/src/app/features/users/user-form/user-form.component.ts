@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../core/models/user.model';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-user-form',
@@ -29,6 +30,7 @@ export class UserFormComponent implements OnInit {
   private fb = inject(FormBuilder);
   private userService = inject(UserService);
   private dialogRef = inject(MatDialogRef<UserFormComponent>);
+  private notificationService = inject(NotificationService);
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: User | null) {
     this.isEditMode = !!data;
@@ -62,11 +64,12 @@ export class UserFormComponent implements OnInit {
     request$.subscribe({
       next: (res) => {
         if (res.success) {
+          this.notificationService.showSuccess(res.message);
           this.dialogRef.close(true);
         }
       },
       error: (err) => {
-        console.error('Error saving user', err);
+        // Handled by Interceptor
       }
     });
   }

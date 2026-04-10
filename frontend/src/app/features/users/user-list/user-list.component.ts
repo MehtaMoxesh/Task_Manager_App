@@ -7,6 +7,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../core/models/user.model';
 import { UserFormComponent } from '../user-form/user-form.component';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-user-list',
@@ -21,6 +22,7 @@ export class UserListComponent implements OnInit {
 
   private userService = inject(UserService);
   private dialog = inject(MatDialog);
+  private notificationService = inject(NotificationService);
 
   ngOnInit() {
     this.loadUsers();
@@ -33,7 +35,9 @@ export class UserListComponent implements OnInit {
           this.users = response.data;
         }
       },
-      error: (err) => console.error('Error fetching users', err)
+      error: (err) => {
+        // Handled by Interceptor
+      }
     });
   }
 
@@ -53,8 +57,13 @@ export class UserListComponent implements OnInit {
   deleteUser(id: number) {
     if (confirm('Are you sure you want to delete this user?')) {
       this.userService.deleteUser(id).subscribe({
-        next: () => this.loadUsers(),
-        error: (err) => console.error('Error deleting user', err)
+        next: (res) => {
+          this.notificationService.showSuccess(res.message);
+          this.loadUsers();
+        },
+        error: (err) => {
+          // Handled by Interceptor
+        }
       });
     }
   }
