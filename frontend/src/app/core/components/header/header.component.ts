@@ -18,6 +18,7 @@ import { AuthService } from '../../services/auth.service';
       
       <button mat-button routerLink="/">Home</button>
       <button mat-button routerLink="/users">Users</button>
+      <button mat-button routerLink="/tasks" *ngIf="authService.isLoggedIn">Tasks</button>
 
       <ng-container *ngIf="authService.currentUser$ | async as user; else guest">
         <button mat-button [matMenuTriggerFor]="userMenu">

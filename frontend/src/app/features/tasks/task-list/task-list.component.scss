@@ -1,0 +1,96 @@
+.task-list-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 500;
+  }
+}
+
+.table-container {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+
+  table {
+    width: 100%;
+  }
+}
+
+.task-title {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.task-desc {
+  font-size: 0.85rem;
+  color: #666;
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+
+  &.todo {
+    background-color: #e0e0e0;
+    color: #616161;
+  }
+
+  &.in-progress {
+    background-color: #e3f2fd;
+    color: #1976d2;
+  }
+
+  &.completed {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+  }
+}
+
+.mat-column-user {
+  width: 180px;
+}
+
+.user-name {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.user-email {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.mat-column-actions {
+  width: 100px;
+  text-align: center;
+}
+
+.mat-column-priority {
+  width: 120px;
+}
+
+.mat-column-status {
+  width: 150px;
+}
+
+.mat-column-dueDate {
+  width: 150px;
+}

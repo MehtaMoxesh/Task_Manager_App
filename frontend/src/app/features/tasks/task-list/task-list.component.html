@@ -1,0 +1,83 @@
+<div class="task-list-container">
+  <div class="header">
+    <h1>My Tasks</h1>
+    <button mat-raised-button color="primary" (click)="openTaskForm()">
+      <mat-icon>add</mat-icon>
+      New Task
+    </button>
+  </div>
+
+  <div class="mat-elevation-z8 table-container">
+    <table mat-table [dataSource]="tasks">
+
+      <!-- Title Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *mat-header-cell> Title </th>
+        <td mat-cell *mat-cell="let task">
+          <div class="task-title">{{task.title}}</div>
+          <div class="task-desc" *ngIf="task.description">{{task.description}}</div>
+        </td>
+      </ng-container>
+
+      <!-- Priority Column -->
+      <ng-container matColumnDef="priority">
+        <th mat-header-cell *mat-header-cell> Priority </th>
+        <td mat-cell *mat-cell="let task">
+          <mat-chip-set>
+            <mat-chip [color]="getPriorityColor(task.priority)" selected>
+              {{task.priority}}
+            </mat-chip>
+          </mat-chip-set>
+        </td>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *mat-header-cell> Status </th>
+        <td mat-cell *mat-cell="let task">
+           <span class="status-badge" [ngClass]="task.status.toLowerCase().replace('_', '-')">
+             {{task.status}}
+           </span>
+        </td>
+      </ng-container>
+
+      <!-- Due Date Column -->
+      <ng-container matColumnDef="dueDate">
+        <th mat-header-cell *mat-header-cell> Due Date </th>
+        <td mat-cell *mat-cell="let task">
+          {{task.dueDate | date:'mediumDate'}}
+        </td>
+      </ng-container>
+
+      <!-- User Column (Admins only) -->
+      <ng-container matColumnDef="user">
+        <th mat-header-cell *mat-header-cell> User </th>
+        <td mat-cell *mat-cell="let task">
+          <div class="user-name">{{task.userName}}</div>
+          <div class="user-email">{{task.userEmail}}</div>
+        </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *mat-header-cell> Actions </th>
+        <td mat-cell *mat-cell="let task">
+          <button mat-icon-button color="primary" (click)="openTaskForm(task)" matTooltip="Edit Task">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteTask(task.id)" matTooltip="Delete Task">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *mat-header-rowDef="displayedColumns"></tr>
+      <tr mat-row *mat-rowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Row shown when there is no data. -->
+      <tr class="mat-row" *mat-noDataRow>
+        <td class="mat-cell" colspan="5">No tasks found. Click "New Task" to get started!</td>
+      </tr>
+    </table>
+  </div>
+</div>

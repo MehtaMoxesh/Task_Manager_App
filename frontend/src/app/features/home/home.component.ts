@@ -21,7 +21,8 @@ import { RouterModule } from '@angular/router';
           </p>
         </mat-card-content>
         <mat-card-actions align="end">
-          <button mat-raised-button color="primary" routerLink="/users">Manage Users</button>
+          <button mat-button color="accent" routerLink="/users">Manage Users</button>
+          <button mat-raised-button color="primary" routerLink="/tasks">Manage Tasks</button>
         </mat-card-actions>
       </mat-card>
     </div>
