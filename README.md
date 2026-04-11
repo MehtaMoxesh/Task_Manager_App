@@ -1,58 +1,93 @@
-# Task Manager App
+# 🚀 Task Manager Pro: Full-Stack Productivity App
 
-A modern, full-stack Task Management application designed for productivity. Built with a robust Spring Boot backend and a dynamic Angular frontend.
+A robust, modern Task Management application featuring a secure **Spring Boot** backend and a responsive **Angular** frontend. 
 
-## ✨ Features
+## ✨ Key Features
 
-- **User Authentication**: Secure JWT-based login and registration.
-- **Task Management**: Create, view, update, and delete tasks.
-- **Task Properties**: 
-    - **Priority**: High, Medium, Low.
-    - **Status**: Todo, In Progress, Completed.
-    - **Due Dates**: Organize your schedule with integrated date selection.
-- **Privacy**: Each user has their own private task list.
-- **Responsive UI**: Clean design using Angular Material components.
+- **🔐 Secure Authentication**: Integrated JWT-based login and registration system. 
+- **📈 Global Task Dashboard**: 
+    - **Admins**: Can oversee, edit, and delete all tasks in the system with creator insights.
+    - **Users**: Enjoy a private workspace where only their tasks are visible.
+- **🏷️ Smart Task Attributes**:
+    - **Dynamic Priority**: LOW, MEDIUM, HIGH.
+    - **Status Tracking**: TODO, IN_PROGRESS, COMPLETED.
+    - **Due Date Integration**: Keep track of deadlines with a modern date selector.
+- **📱 Premium UI**: Built with Angular Material for a sleek, responsive experience.
+
+---
+
+## 🏗️ Project Architecture
+
+```text
+Internship-Project/
+├── backend/                # Spring Boot REST API
+│   ├── src/main/java       # Java Source Code
+│   ├── src/main/resources  # Configuration (YAML, SQL)
+│   └── pom.xml             # Maven Project Definition
+├── frontend/               # Angular Web Application
+│   ├── src/app/core        # Core Business Logic (Services, Models)
+│   ├── src/app/features    # Feature Modules (Auth, Tasks, Home)
+│   └── angular.json        # Angular Workspace Configuration
+└── README.md               # You are here!
+```
+
+---
 
 ## 🚀 Technical Stack
 
-- **Backend**: Java 17, Spring Boot 3.2.4, Spring Data JPA, Spring Security, MySQL.
-- **Frontend**: Angular 17, Angular Material, RxJS, TypeScript.
+### Backend
+- **Framework**: Spring Boot 3.2.4
+- **Language**: Java 17
+- **Security**: Spring Security + JWT
+- **Database**: MySQL 8.x + Spring Data JPA
+- **Build Tool**: Maven
+
+### Frontend
+- **Framework**: Angular 17
+- **Logic**: RxJS, TypeScript
+- **Styling**: Angular Material, Vanilla CSS
+- **Proxy**: Angular Dev Server Proxy to Backend
+
+---
 
 ## 🛠️ API Endpoints
 
-### Authentication
-- `POST /api/auth/register` - Register a new user
-- `POST /api/auth/login` - Authenticate and receive JWT
+| Category | Endpoint | Method | Description |
+| :--- | :--- | :--- | :--- |
+| **Auth** | `/api/auth/login` | `POST` | Login & receive JWT |
+| **Auth** | `/api/auth/register` | `POST` | Register a new user |
+| **Tasks** | `/api/tasks` | `GET` | List all tasks (Admin see all, User see own) |
+| **Tasks** | `/api/tasks` | `POST` | Create a new task |
+| **Tasks** | `/api/tasks/{id}` | `PUT` | Update a task (Full CRUD for Admin) |
+| **Tasks** | `/api/tasks/{id}` | `DELETE`| Delete a task |
+| **Users** | `/api/users` | `GET` | Manage all users (Admin only) |
 
-### Task Management
-- `GET /api/tasks` - List all tasks for current user
-- `POST /api/tasks` - Create a new task
-- `PUT /api/tasks/{id}` - Update an existing task
-- `DELETE /api/tasks/{id}` - Delete a task
-
-### User Management
-- `GET /api/users` - List all users (Requires Admin role)
+---
 
 ## 🏁 Getting Started
 
-### Prerequisites
-- Java 17+
-- Node.js 18+
-- MySQL 8.x
-- Maven 3.x
+### 📝 Prerequisites
+- **Java**: 17 or higher
+- **Node.js**: 18.x or higher
+- **MySQL**: 8.x running with user-creation privileges
 
-### Run Backend
+### 🛠️ Step 1: Backend Setup
 ```bash
 cd backend
-./mvnw spring-boot:run
+# Run Maven wrapper (Windows)
+.\mvnw spring-boot:run
 ```
+*The app will automatically seed test users on the first run.*
 
-### Run Frontend
+### 🛠️ Step 2: Frontend Setup
 ```bash
 cd frontend
 npm install
-npm start
+npm run start
 ```
+*Access the app at: http://localhost:4200*
+
+---
 
 ## 📝 Dummy Credentials
 
@@ -60,3 +95,10 @@ npm start
 | :--- | :--- | :--- |
 | **Admin** | `admin@test.com` | `admin123` |
 | **User** | `user@test.com` | `password123` |
+
+---
+
+## 🛠️ System Design Notes
+- **User Isolation**: All task-level CRUD operations in `TaskService` check for the user's role and ID to prevent unauthorized data access.
+- **Data Seeding**: A `DataInitializer` bean ensures test accounts are present and their passwords match the current encryption algorithm.
+- **Proxy Config**: The frontend uses `proxy.conf.json` to route `/api` calls safely to `http://127.0.0.1:8080`.
